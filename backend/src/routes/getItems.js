@@ -1,6 +1,9 @@
-const db = require('../persistence');
+const db = require('../persistence/');
 
 module.exports = async (req, res) => {
-    const items = await db.getItems();
+    console.log('Received request for item');
+    console.log(db)
+    const items = await db.players.getItems();
+    console.log('Sending items:', items);
     res.send(items);
 };
