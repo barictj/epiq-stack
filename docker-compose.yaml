@@ -20,19 +20,14 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      target: backend-dev
     ports:
       - "3001:3001"
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: players
-      CHOKIDAR_USEPOLLING: "true"
-    depends_on:
-      - mysql
     volumes:
-      - ./backend:/usr/local/app
+      - ./backend/src:/usr/local/app/src
+      - ./backend/package.json:/usr/local/app/package.json
+      - ./backend/package-lock.json:/usr/local/app/package-lock.json
+      - backend-node-modules:/usr/local/app/node_modules
+    restart: always
 
   mysql:
     image: mysql:8
@@ -46,4 +41,5 @@ services:
       - mysql-data:/var/lib/mysql
 
 volumes:
+  backend-node-modules:
   mysql-data:

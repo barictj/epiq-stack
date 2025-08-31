@@ -5,7 +5,6 @@ const {
     updateItem,
     removeItem,
 } = require('./players');
-console.log('Player persistence module loaded');
 module.exports = {
     getItems,
     getItem,
