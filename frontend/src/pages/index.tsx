@@ -9,7 +9,7 @@ export default function Home({ items }: { items: any[] }) {
     return (
         <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
             <h1>✅ next</h1>
-            <p>Welcome to your modular stack, Thomas.</p>
+            <p>Bubba, I love you the <h2>MOST</h2></p>
             {items && items.length > 0 ? (
                 <ul>
                     {items.map((item) => (
