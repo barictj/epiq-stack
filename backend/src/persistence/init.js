@@ -10,7 +10,7 @@ async function init() {
   await waitPort({
     host: config.host,
     port: 3306,
-    timeout: 10000,
+    timeout: 30000,
     waitForDns: true,
   });
   await pool.promise().query('SET FOREIGN_KEY_CHECKS = 0');

@@ -1,0 +1,14 @@
+FROM node:22 AS base
+WORKDIR /usr/local/app
+
+# Install deps
+COPY package*.json ./
+RUN npm install
+
+# Copy app files
+
+COPY public ./public
+COPY src ./src
+COPY next.config.js ./
+COPY tsconfig.json ./
+CMD ["npm", "run", "dev"]

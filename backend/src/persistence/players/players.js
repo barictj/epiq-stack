@@ -16,7 +16,6 @@ async function getItem(id) {
 }
 
 async function storeItem(item) {
-    console.log('Storing item:', item);
     await pool.promise().query(
         'INSERT INTO players  (id, name, active) VALUES (?, ?, ?)',
         [item.id, item.name, item.completed ? 1 : 0]

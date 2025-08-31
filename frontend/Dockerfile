@@ -1,18 +1,20 @@
-# Use a stable Node base image
-FROM node:20-alpine
+FROM node:22
 
-# Set working directory
-WORKDIR /app
+WORKDIR /usr/local/app
 
 # Install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package*.json ./
+RUN npm install --production
 
-# Copy the rest of the app
-COPY . .
+# Copy app files
+COPY public ./public
+COPY src ./src
+COPY next.config.js ./
+COPY tsconfig.json ./
 
-# Expose dev port
+# Build the Next.js app
+RUN npm run build
+
+# Expose and start
 EXPOSE 3000
-
-# Start Next.js dev server
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

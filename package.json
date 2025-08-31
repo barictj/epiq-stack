@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "next": "^13.4.19"
+  }
+}
