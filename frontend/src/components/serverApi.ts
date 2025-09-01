@@ -1,8 +1,8 @@
-const BASE_URL = 'http://backend:3001'
-
+const baseUrl = 'http://backend:3001';
 export async function fetchItemsSSR() {
+    console.log('Fetching items from server...');
     try {
-        const res = await fetch(`${BASE_URL}/api/items`);
+        const res = await fetch(`${baseUrl}/api/items`);
         if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
         return await res.json();
     } catch (err) {
@@ -13,7 +13,7 @@ export async function fetchItemsSSR() {
 
 export async function storeItemSSR(item: { id: number; name: string; completed: boolean }) {
     try {
-        const res = await fetch(`${BASE_URL}/api/items`, {
+        const res = await fetch(`${baseUrl}/api/items`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item),

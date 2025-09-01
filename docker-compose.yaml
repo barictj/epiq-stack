@@ -28,12 +28,14 @@ services:
     profiles:
       - prod
     depends_on:
-      - backend
+      - backend-prod
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    profiles:
+      - dev
     ports:
       - "3001:3001"
     volumes:
@@ -47,7 +49,26 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: players
-
+      NODE_ENV: development
+  backend-prod:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend/src:/usr/local/app/src
+      - ./backend/package.json:/usr/local/app/package.json
+      - ./backend/package-lock.json:/usr/local/app/package-lock.json
+      - backend-node-modules:/usr/local/app/node_modules
+    restart: always
+    profiles:
+      - prod
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: players
   mysql:
     image: mysql:8
     restart: always

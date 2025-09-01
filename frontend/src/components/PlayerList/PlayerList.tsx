@@ -6,18 +6,16 @@ type Item = {
     name: string;
 };
 
-export default function PlayerList() {
-    const [items, setItems] = useState<Item[]>([]);
+const PlayerList = ({ items = [] }: { items?: Item[] }) => {
 
-    useEffect(() => {
-        fetchItemsSSR().then(setItems);
-    }, []);
 
     return (
         <div>
             {items.map((item) => (
-                <div key={item.id}>{item.name}</div>
+                <div key={item.id}>Guys name {item.name}</div>
             ))}
         </div>
     );
-}
+};
+
+export default PlayerList;
