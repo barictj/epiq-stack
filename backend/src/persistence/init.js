@@ -27,8 +27,16 @@ async function init() {
 CREATE TABLE IF NOT EXISTS players (
   id VARCHAR(36) PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
+  all_time_epiq int DEFAULT 0,
   active BOOLEAN DEFAULT 1,
   games_played INT DEFAULT 0,
+  player_image_url VARCHAR(255) DEFAULT NULL,
+  team VARCHAR(100) DEFAULT NULL,
+  position VARCHAR(50) DEFAULT NULL,
+  height VARCHAR(10) DEFAULT NULL,
+  weight VARCHAR(10) DEFAULT NULL,
+  college VARCHAR(100) DEFAULT NULL,
+  birth_date DATE DEFAULT NULL,
   all_time_efficiency_possession_impact_quotient int DEFAULT 0,
   all_time_points_per_game INT DEFAULT 0,
   all_time_rebounds_per_game INT DEFAULT 0,
@@ -156,20 +164,23 @@ CREATE TABLE IF NOT EXISTS player_stats_current_year (
     `INSERT INTO players (
     id, name, active, games_played,
     all_time_points_per_game, all_time_rebounds_per_game, all_time_assists_per_game,
-    all_time_steals_per_game, all_time_blocks_per_game, all_time_turnovers_per_game, all_time_fouls_per_game
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    all_time_steals_per_game, all_time_blocks_per_game, all_time_turnovers_per_game, all_time_fouls_per_game,
+    player_image_url, all_time_epiq
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       'player-001',
       'Thomas Testerson',
       true,
       82,
-      1840,
-      520,
-      410,
+      29.6,
+      12.7,
+      10.2,
       95,
       60,
       120,
-      140
+      140,
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3112335.png&w=350&h=254",
+      214.7
     ]
   );
 
