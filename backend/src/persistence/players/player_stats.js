@@ -1,0 +1,75 @@
+// /persistence/player_stats.js
+const pool = require('../pool');
+
+async function updatePlayerStats(item) {
+    await pool.promise().query(
+        `INSERT INTO player_stats_by_year (
+            player_id,
+            season_year,
+            games_played,
+            efficiency_possession_impact_quotient,
+            total_points,
+            total_rebounds,
+            total_assists,
+            total_steals,
+            total_blocks,
+            total_turnovers,
+            total_fouls,
+            field_goals_made,
+            field_goals_attempted,
+            three_points_made,
+            three_points_attempted,
+            free_throws_made,
+            free_throws_attempted,
+            offensive_rebounds,
+            defensive_rebounds,
+            points_against
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+            games_played = VALUES(games_played),
+            efficiency_possession_impact_quotient = VALUES(efficiency_possession_impact_quotient),
+            total_points = VALUES(total_points),
+            total_rebounds = VALUES(total_rebounds),
+            total_assists = VALUES(total_assists),
+            total_steals = VALUES(total_steals),
+            total_blocks = VALUES(total_blocks),
+            total_turnovers = VALUES(total_turnovers),
+            total_fouls = VALUES(total_fouls),
+            field_goals_made = VALUES(field_goals_made),
+            field_goals_attempted = VALUES(field_goals_attempted),
+            three_points_made = VALUES(three_points_made),
+            three_points_attempted = VALUES(three_points_attempted),
+            free_throws_made = VALUES(free_throws_made),
+            free_throws_attempted = VALUES(free_throws_attempted),
+            offensive_rebounds = VALUES(offensive_rebounds),
+            defensive_rebounds = VALUES(defensive_rebounds),
+            points_against = VALUES(points_against)`,
+        [
+            item.player_id,
+            item.season_year,
+            item.games_played,
+            item.efficiency_possession_impact_quotient,
+            item.total_points,
+            item.total_rebounds,
+            item.total_assists,
+            item.total_steals,
+            item.total_blocks,
+            item.total_turnovers,
+            item.total_fouls,
+            item.field_goals_made,
+            item.field_goals_attempted,
+            item.three_points_made,
+            item.three_points_attempted,
+            item.free_throws_made,
+            item.free_throws_attempted,
+            item.offensive_rebounds,
+            item.defensive_rebounds,
+            item.points_against
+        ]
+    );
+}
+
+
+module.exports = {
+    updatePlayerStats
+};

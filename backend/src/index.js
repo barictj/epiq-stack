@@ -7,6 +7,9 @@ const getItems = require('./routes/getItems');
 const addItem = require('./routes/addItem');
 const updateItem = require('./routes/updateItem');
 const deleteItem = require('./routes/deleteItem');
+const getJoinedItems = require('./routes/getJoinedItems')
+const updatePlayerStats = require('./routes/updatePlayerStats')
+const { get } = require('http');
 console.log(Object.keys(db))
 app.use(cors({
     origin: 'http://localhost:3000'
@@ -20,6 +23,8 @@ app.get('/api/items', getItems);
 app.post('/api/items', addItem);
 app.put('/api/items/:id', updateItem);
 app.delete('/api/items/:id', deleteItem);
+app.get('/api/getJoinedItems/:id', getJoinedItems);
+app.put('/api/updatePlayerStats/:id', updatePlayerStats);
 // Allow requests from frontend
 
 db.init()

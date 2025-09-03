@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
     };
 
     try {
-        await db.player_stats.updateItem(item); // Assumes you have an updateItem method
+        await db.player_stats.updatePlayerStats(item); // Assumes you have an updateItem method
         res.status(200).send({ message: 'Player stats updated', item });
     } catch (error) {
         console.error('Error updating player stats:', error);
