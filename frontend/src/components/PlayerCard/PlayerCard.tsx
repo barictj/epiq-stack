@@ -1,6 +1,6 @@
 import Col from 'react-bootstrap/Col';
 import styles from './playerCard.module.css';
-
+import Link from 'next/link';
 interface PlayerCardProps {
     item: any;
     yearStats: any;
@@ -26,7 +26,9 @@ export default function PlayerCard({ item, yearStats }: PlayerCardProps) {
                         alt={item.name}
                         className={styles.playerImage}
                     />
-                    <h2 className={styles.playerName}>{item.name}</h2>
+                    <h2 className={styles.playerName}>
+                        <Link href={`/getByPlayer?id=${item.id}`}>{item.name}</Link>
+                    </h2>
                 </div>
 
                 <div className={styles.cardStats}>

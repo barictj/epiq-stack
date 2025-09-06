@@ -9,6 +9,15 @@ export async function fetchItemsSSR() {
         return [];
     }
 }
+export async function fetchItemSSR(id: any) {
+    try {
+        const res = await fetch(`${baseUrl}/api/items/${id}`);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        return [];
+    }
+}
 
 export async function storeItemSSR(item: { id: number; name: string; completed: boolean }) {
     try {
@@ -42,6 +51,17 @@ export async function fetchAllStatsByYear(year: number) {
         return await res.json();
     } catch (err) {
         console.error(`SSR fetchAllStatsByYear error for ${year}`, err);
+        return null;
+    }
+}
+
+export async function searchPlayersByName(name: string) {
+    try {
+        const res = await fetch(`http://localhost:3001/api/searchPlayersByName/${name}`);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        console.error(`SSR searchPlayersByName error for ${name}`, err);
         return null;
     }
 }

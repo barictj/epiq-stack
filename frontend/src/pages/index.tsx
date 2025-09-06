@@ -29,13 +29,11 @@ export async function getServerSideProps() {
 
 export default function Index({ items }: { items: { id: string; name: string; yearStats: any;[key: string]: any }[] }) {
     return (
-        <main style={{ backgroundColor: '#f0f2f5', paddingTop: '20px', minHeight: '100vh' }}>
-            <Link href="/getBySeason?year=1979">
-                View 1979 Season
-            </Link>
+        <>
+
 
             <Home items={items} />
 
-        </main>
+        </>
     );
 }

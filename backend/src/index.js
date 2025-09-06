@@ -11,6 +11,7 @@ const getJoinedItems = require('./routes/getJoinedItems')
 const updatePlayerStats = require('./routes/updatePlayerStats')
 const getBySeason = require('./routes/getBySeason')
 const searchPlayersByName = require('./routes/searchPlayersByName')
+const getItem = require('./routes/getItem');
 const { get } = require('http');
 
 app.use(cors({
@@ -29,6 +30,7 @@ app.get('/api/getJoinedItems/:id', getJoinedItems);
 app.put('/api/updatePlayerStats/:id', updatePlayerStats);
 app.get('/api/getBySeason/:year', getBySeason);
 app.get('/api/searchPlayersByName/:name', searchPlayersByName);
+app.get('/api/items/:id', getItem);
 // Allow requests from frontend
 
 db.init()
