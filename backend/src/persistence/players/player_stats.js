@@ -1,9 +1,9 @@
-// /persistence/player_stats.js
 const pool = require('../pool');
 
 async function updatePlayerStats(item) {
     await pool.promise().query(
         `INSERT INTO player_stats_by_year (
+            id,
             player_id,
             season_year,
             games_played,
@@ -23,8 +23,11 @@ async function updatePlayerStats(item) {
             free_throws_attempted,
             offensive_rebounds,
             defensive_rebounds,
-            points_against
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            possessions,
+            points_against,
+            seasonal_epiq,
+            epiq_per_game
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
             games_played = VALUES(games_played),
             efficiency_possession_impact_quotient = VALUES(efficiency_possession_impact_quotient),
@@ -43,8 +46,13 @@ async function updatePlayerStats(item) {
             free_throws_attempted = VALUES(free_throws_attempted),
             offensive_rebounds = VALUES(offensive_rebounds),
             defensive_rebounds = VALUES(defensive_rebounds),
-            points_against = VALUES(points_against)`,
+            possessions = VALUES(possessions),
+            points_against = VALUES(points_against),
+            seasonal_epiq = VALUES(seasonal_epiq),
+            epiq_per_game = VALUES(epiq_per_game)
+        `,
         [
+            item.id,
             item.player_id,
             item.season_year,
             item.games_played,
@@ -64,11 +72,14 @@ async function updatePlayerStats(item) {
             item.free_throws_attempted,
             item.offensive_rebounds,
             item.defensive_rebounds,
-            item.points_against
+            item.possessions,
+            item.points_against,
+            item.seasonal_epiq,
+            item.epiq_per_game
         ]
+
     );
 }
-
 
 module.exports = {
     updatePlayerStats

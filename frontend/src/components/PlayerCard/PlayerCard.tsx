@@ -1,17 +1,24 @@
 import Col from 'react-bootstrap/Col';
 import styles from './playerCard.module.css';
-export default function PlayerCard({ item }: { item: any }) {
-    console.log(item.yearStats)
 
+interface PlayerCardProps {
+    item: any;
+    yearStats: any;
+}
 
-    let pointsPerGame = (item.yearStats[0].total_points / item.yearStats[0].games_played).toFixed(2);
-    let reboundsPerGame = (item.yearStats[0].total_rebounds / item.yearStats[0].games_played).toFixed(2);
-    let assistsPerGame = (item.yearStats[0].total_assists / item.yearStats[0].games_played).toFixed(2);
+export default function PlayerCard({ item, yearStats }: PlayerCardProps) {
+    if (!yearStats || yearStats.games_played === 0) return null;
+    const stats = yearStats;
+    const pointsPerGame = (stats.total_points / stats.games_played).toFixed(2);
+    const reboundsPerGame = (stats.total_rebounds / stats.games_played).toFixed(2);
+    const assistsPerGame = (stats.total_assists / stats.games_played).toFixed(2);
 
     return (
-        <Col sm={6} lg={6} key={item.id}>
+        <Col sm={4} lg={4} key={item.id}>
             <div className={styles.basketballCard}>
-                <div className={styles.rarityBadge}>All-Star</div>
+                <div className={styles.rarityBadge}>
+                    {stats.season_year} / {stats.season_year + 1}
+                </div>
 
                 <div className={styles.cardTop}>
                     <img
@@ -24,13 +31,29 @@ export default function PlayerCard({ item }: { item: any }) {
 
                 <div className={styles.cardStats}>
                     <div className={`${styles.stat} ${styles.epiqStat}`}>
-                        <span>EPIQ Score</span><strong>{item.yearStats.efficiency_possession_impact_quotient}</strong>
+                        <span>EPIQ Score</span>
+                        <strong>{stats.efficiency_possession_impact_quotient}</strong>
                     </div>
-
-                    <div className={styles.stat}><span>Points Per Game</span><strong>{parseFloat(pointsPerGame)}</strong></div>
-                    <div className={styles.stat}><span>Rebounds Per Game</span><strong>{reboundsPerGame}</strong></div>
-                    <div className={styles.stat}><span>Assists Per Game</span><strong>{assistsPerGame}</strong></div>
-
+                    <div className={styles.stat}>
+                        <span>Season EPIQ Total</span>
+                        <strong>{stats.seasonal_epiq}</strong>
+                    </div>
+                    <div className={styles.stat}>
+                        <span>EPIQ Per Game</span>
+                        <strong>{stats.epiq_per_game}</strong>
+                    </div>
+                    <div className={styles.stat}>
+                        <span>Points Per Game</span>
+                        <strong>{pointsPerGame}</strong>
+                    </div>
+                    <div className={styles.stat}>
+                        <span>Rebounds Per Game</span>
+                        <strong>{reboundsPerGame}</strong>
+                    </div>
+                    <div className={styles.stat}>
+                        <span>Assists Per Game</span>
+                        <strong>{assistsPerGame}</strong>
+                    </div>
                 </div>
 
                 <div className={styles.cardFooter}>
@@ -39,5 +62,5 @@ export default function PlayerCard({ item }: { item: any }) {
                 </div>
             </div>
         </Col>
-    )
+    );
 }

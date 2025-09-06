@@ -2,7 +2,12 @@ const db = require('../persistence');
 
 module.exports = async (req, res) => {
     try {
-        const items = await db.players.getJoinedItems(req.params.id);
+        const { name } = req.params;
+
+        const items = name
+            ? await db.players.searchPlayersByName(name)
+            : await db.players.getItems();
+
         res.json(items);
     } catch (err) {
         console.error('API error:', err);

@@ -22,7 +22,10 @@ module.exports = async (req, res) => {
         free_throws_attempted,
         offensive_rebounds,
         defensive_rebounds,
-        points_against
+        possessions,
+        points_against,
+        seasonal_epiq,
+        epiq_per_game
     } = req.body;
 
     const item = {
@@ -46,7 +49,10 @@ module.exports = async (req, res) => {
         free_throws_attempted,
         offensive_rebounds,
         defensive_rebounds,
-        points_against
+        possessions,
+        points_against,
+        seasonal_epiq,
+        epiq_per_game
     };
 
     try {

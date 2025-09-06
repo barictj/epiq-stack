@@ -6,7 +6,11 @@ const {
     updateItem,
     removeItem,
     getJoinedItems,
+    getBySeason
 } = require('./players');
+const {
+    searchPlayersByName
+} = require('./player_search');
 const {
     updatePlayerStats
 } = require('./player_stats');
@@ -17,5 +21,7 @@ module.exports = {
     updateItem,
     removeItem,
     getJoinedItems,
-    updatePlayerStats
+    updatePlayerStats,
+    getBySeason,
+    searchPlayersByName
 };

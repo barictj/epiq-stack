@@ -58,7 +58,11 @@ async function init() {
     offensive_rebounds INT DEFAULT 0,
     defensive_rebounds INT DEFAULT 0,
     points_against INT DEFAULT 0,
-    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+    possessions INT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_player_season (player_id, season_year)
   ) DEFAULT CHARSET=utf8mb4;
 `);
 
@@ -82,6 +86,7 @@ async function init() {
     offensive_rebounds INT DEFAULT 0,
     defensive_rebounds INT DEFAULT 0,
     points_against INT DEFAULT 0,
+    possessions INT DEFAULT 0,
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
 `);
@@ -112,6 +117,7 @@ async function init() {
     free_throws_attempted INT DEFAULT 0,
     offensive_rebounds INT DEFAULT 0,
     defensive_rebounds INT DEFAULT 0,
+    possession INT DEFAULT 0,
     points_against INT DEFAULT 0,
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
@@ -124,12 +130,13 @@ async function init() {
     AND table_name = 'player_stats_by_year'
     AND index_name = 'idx_player_season';
 `);
+  await pool.promise().query(
+    'CREATE INDEX idx_player_season ON player_stats_by_year(player_id, season_year)'
+  );
+  await pool.promise().query(
+    'CREATE INDEX idx_players_name ON players(name)'
+  );
 
-  if (existingIndexes[0].count === 0) {
-    await pool.promise().query(`
-    CREATE INDEX idx_player_season ON player_stats_by_year(player_id, season_year);
-  `);
-  }
 
   await pool.promise().query(`
   INSERT INTO players (

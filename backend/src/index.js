@@ -9,8 +9,10 @@ const updateItem = require('./routes/updateItem');
 const deleteItem = require('./routes/deleteItem');
 const getJoinedItems = require('./routes/getJoinedItems')
 const updatePlayerStats = require('./routes/updatePlayerStats')
+const getBySeason = require('./routes/getBySeason')
+const searchPlayersByName = require('./routes/searchPlayersByName')
 const { get } = require('http');
-console.log(Object.keys(db))
+
 app.use(cors({
     origin: 'http://localhost:3000'
 }));
@@ -25,6 +27,8 @@ app.put('/api/items/:id', updateItem);
 app.delete('/api/items/:id', deleteItem);
 app.get('/api/getJoinedItems/:id', getJoinedItems);
 app.put('/api/updatePlayerStats/:id', updatePlayerStats);
+app.get('/api/getBySeason/:year', getBySeason);
+app.get('/api/searchPlayersByName/:name', searchPlayersByName);
 // Allow requests from frontend
 
 db.init()
