@@ -58,12 +58,12 @@ async function init() {
     offensive_rebounds INT DEFAULT 0,
     defensive_rebounds INT DEFAULT 0,
     points_against INT DEFAULT 0,
-    possessions INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
     seasonal_epiq FLOAT DEFAULT 0,
     epiq_per_game FLOAT DEFAULT 0,
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
-  ) DEFAULT CHARSET=utf8mb4;
+);
 `);
 
   await pool.promise().query(`

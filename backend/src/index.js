@@ -27,6 +27,7 @@ app.post('/api/items', addItem);
 app.put('/api/items/:id', updateItem);
 app.delete('/api/items/:id', deleteItem);
 app.get('/api/getJoinedItems/:id', getJoinedItems);
+app.post('/api/addPlayerStats', updatePlayerStats);
 app.put('/api/updatePlayerStats/:id', updatePlayerStats);
 app.get('/api/getBySeason/:year', getBySeason);
 app.get('/api/searchPlayersByName/:name', searchPlayersByName);
