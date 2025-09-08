@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.navbar {
+    /* Dark background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    background-color: #063849 !important;
+    color: white !important;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+
+}
+
+.navbar a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.app_nav_bar_navbar__9tira :not(.app_nav_bar_searchLinks__I_46Q):not(.app_nav_bar_form-control__hUz_d):not(input):not(textarea):not(select) {
+    color: white !important;
+    text-decoration: none !important;
+}

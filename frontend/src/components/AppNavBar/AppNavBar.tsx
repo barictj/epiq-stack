@@ -10,12 +10,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Link from 'next/link';
 import { searchPlayersByName } from '../serverApi';
 import NavBar from './NavBar/NavBar';
+import styles from './app_nav_bar.module.css';
 
 export default function AppNavbar() {
 
 
     return (
-        <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
+        <Navbar className={styles.navbar} expand="lg" sticky="top">
             <Container>
                 <Navbar.Brand href="/">EPIQ</Navbar.Brand>
                 <Navbar.Toggle aria-controls="epi-navbar" />

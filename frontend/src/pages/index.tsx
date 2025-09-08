@@ -1,39 +1,38 @@
-import Link from 'next/link';
-import Home from '@components/Home/Home';
-import PlayerList from '@components/PlayerList/PlayerList';
+
+
+import TopPlayerList from '@components/TopPlayerList/TopPlayerList';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { fetchItemsSSR, fetchPlayerStatsByYear } from '../components/serverApi';
+import { fetchTopPlayers } from '../components/serverApi';
+import Home from '@components/Home/Home';
 
 export async function getServerSideProps() {
-    const items = await fetchItemsSSR();
-
-    // Fetch year-by-year stats for each player
-    // Define the type for item, e.g., ItemType. Replace with your actual type if available.
-    type ItemType = { id: string; name: string;[key: string]: any };
 
 
-    const enrichedItems = await Promise.all(
-        items.map(async (item: ItemType) => {
-            const yearStats = await fetchPlayerStatsByYear(item.id);
+    // Optionally fetch top players (e.g., for leaderboard or featured section)
+    const topPlayers = await fetchTopPlayers({ year: 1989, limit: 20, sortBy: 'epiq_per_game' });
 
-            return {
-                ...item,
-                yearStats
-            };
-        })
-    );
 
-    return { props: { items: enrichedItems } };
+    return {
+        props: {
+            topPlayers
+        }
+    };
 }
 
-export default function Index({ items }: { items: { id: string; name: string; yearStats: any;[key: string]: any }[] }) {
+export default function Index({
+    topPlayers
+}: {
+
+    topPlayers: any[];
+}) {
+
+    const topFive = topPlayers.slice(0, 5);
+    const topNotFive = topPlayers.slice(5);
     return (
         <>
-
-
-            <Home items={items} />
-
+            <Home items={topPlayers} />
         </>
     );
 }

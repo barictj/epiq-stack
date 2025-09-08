@@ -20,6 +20,11 @@ async function init() {
     await pool.promise().query('DROP TABLE IF EXISTS player_stats_by_year');
     await pool.promise().query('DROP TABLE IF EXISTS player_stats_all_time');
     await pool.promise().query('DROP TABLE IF EXISTS player_game_stats');
+    await pool.promise().query('DROP TABLE IF EXISTS average_for_centers_by_year');
+    await pool.promise().query('DROP TABLE IF EXISTS average_for_forwards_by_year');
+    await pool.promise().query('DROP TABLE IF EXISTS average_for_point_guards_by_year');
+    await pool.promise().query('DROP TABLE IF EXISTS average_for_shooting_guards_by_year');
+    await pool.promise().query('DROP TABLE IF EXISTS average_for_all_players');
     await pool.promise().query('SET FOREIGN_KEY_CHECKS = 1');
   }
 
@@ -61,10 +66,13 @@ async function init() {
     possessions FLOAT DEFAULT 0,
     seasonal_epiq FLOAT DEFAULT 0,
     epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    position VARCHAR(50) DEFAULT '',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
 `);
+
 
   await pool.promise().query(`
   CREATE TABLE IF NOT EXISTS player_stats_all_time (
@@ -87,6 +95,9 @@ async function init() {
     defensive_rebounds INT DEFAULT 0,
     points_against INT DEFAULT 0,
     possessions INT DEFAULT 0,
+    team VARCHAR(100) DEFAULT '',
+      position VARCHAR(50) DEFAULT '',
+
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
 `);
@@ -119,10 +130,169 @@ async function init() {
     defensive_rebounds INT DEFAULT 0,
     possession INT DEFAULT 0,
     points_against INT DEFAULT 0,
+    team VARCHAR(100) DEFAULT '',
+        position VARCHAR(50) DEFAULT '',
+
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
 `);
-
+  await pool.promise().query(`
+  CREATE TABLE IF NOT EXISTS average_for_centers_by_year (
+    id VARCHAR(36) PRIMARY KEY,
+    player_id VARCHAR(36),
+    season_year INT NOT NULL,
+    games_played INT DEFAULT 0,
+    efficiency_possession_impact_quotient FLOAT DEFAULT 0,
+    total_points INT DEFAULT 0,
+    total_rebounds INT DEFAULT 0,
+    total_assists INT DEFAULT 0,
+    total_steals INT DEFAULT 0,
+    total_blocks INT DEFAULT 0,
+    total_turnovers INT DEFAULT 0,
+    total_fouls INT DEFAULT 0,
+    field_goals_made INT DEFAULT 0,
+    field_goals_attempted INT DEFAULT 0,
+    three_points_made INT DEFAULT 0,
+    three_points_attempted INT DEFAULT 0,
+    free_throws_made INT DEFAULT 0,
+    free_throws_attempted INT DEFAULT 0,
+    offensive_rebounds INT DEFAULT 0,
+    defensive_rebounds INT DEFAULT 0,
+    points_against INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    position VARCHAR(50) DEFAULT '',
+    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_player_season (player_id, season_year)
+);
+`);
+  await pool.promise().query(`
+  CREATE TABLE IF NOT EXISTS average_for_forwards_by_year (
+    id VARCHAR(36) PRIMARY KEY,
+    player_id VARCHAR(36),
+    season_year INT NOT NULL,
+    games_played INT DEFAULT 0,
+    efficiency_possession_impact_quotient FLOAT DEFAULT 0,
+    total_points INT DEFAULT 0,
+    total_rebounds INT DEFAULT 0,
+    total_assists INT DEFAULT 0,
+    total_steals INT DEFAULT 0,
+    total_blocks INT DEFAULT 0,
+    total_turnovers INT DEFAULT 0,
+    total_fouls INT DEFAULT 0,
+    field_goals_made INT DEFAULT 0,
+    field_goals_attempted INT DEFAULT 0,
+    three_points_made INT DEFAULT 0,
+    three_points_attempted INT DEFAULT 0,
+    free_throws_made INT DEFAULT 0,
+    free_throws_attempted INT DEFAULT 0,
+    offensive_rebounds INT DEFAULT 0,
+    defensive_rebounds INT DEFAULT 0,
+    points_against INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    position VARCHAR(50) DEFAULT '',
+    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_player_season (player_id, season_year)
+);
+`);
+  await pool.promise().query(`
+  CREATE TABLE IF NOT EXISTS average_for_shooting_guards_by_year (
+    id VARCHAR(36) PRIMARY KEY,
+    player_id VARCHAR(36),
+    season_year INT NOT NULL,
+    games_played INT DEFAULT 0,
+    efficiency_possession_impact_quotient FLOAT DEFAULT 0,
+    total_points INT DEFAULT 0,
+    total_rebounds INT DEFAULT 0,
+    total_assists INT DEFAULT 0,
+    total_steals INT DEFAULT 0,
+    total_blocks INT DEFAULT 0,
+    total_turnovers INT DEFAULT 0,
+    total_fouls INT DEFAULT 0,
+    field_goals_made INT DEFAULT 0,
+    field_goals_attempted INT DEFAULT 0,
+    three_points_made INT DEFAULT 0,
+    three_points_attempted INT DEFAULT 0,
+    free_throws_made INT DEFAULT 0,
+    free_throws_attempted INT DEFAULT 0,
+    offensive_rebounds INT DEFAULT 0,
+    defensive_rebounds INT DEFAULT 0,
+    points_against INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    position VARCHAR(50) DEFAULT '',
+    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_player_season (player_id, season_year)
+);
+`);
+  await pool.promise().query(`
+  CREATE TABLE IF NOT EXISTS average_for_point_guards_by_year (
+    id VARCHAR(36) PRIMARY KEY,
+    player_id VARCHAR(36),
+    season_year INT NOT NULL,
+    games_played INT DEFAULT 0,
+    efficiency_possession_impact_quotient FLOAT DEFAULT 0,
+    total_points INT DEFAULT 0,
+    total_rebounds INT DEFAULT 0,
+    total_assists INT DEFAULT 0,
+    total_steals INT DEFAULT 0,
+    total_blocks INT DEFAULT 0,
+    total_turnovers INT DEFAULT 0,
+    total_fouls INT DEFAULT 0,
+    field_goals_made INT DEFAULT 0,
+    field_goals_attempted INT DEFAULT 0,
+    three_points_made INT DEFAULT 0,
+    three_points_attempted INT DEFAULT 0,
+    free_throws_made INT DEFAULT 0,
+    free_throws_attempted INT DEFAULT 0,
+    offensive_rebounds INT DEFAULT 0,
+    defensive_rebounds INT DEFAULT 0,
+    points_against INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    position VARCHAR(50) DEFAULT '',
+    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_player_season (player_id, season_year)
+);
+`);
+  await pool.promise().query(`
+  CREATE TABLE IF NOT EXISTS average_for_all_players (
+    id VARCHAR(36) PRIMARY KEY,
+    player_id VARCHAR(36),
+    season_year INT NOT NULL,
+    games_played INT DEFAULT 0,
+    efficiency_possession_impact_quotient FLOAT DEFAULT 0,
+    total_points INT DEFAULT 0,
+    total_rebounds INT DEFAULT 0,
+    total_assists INT DEFAULT 0,
+    total_steals INT DEFAULT 0,
+    total_blocks INT DEFAULT 0,
+    total_turnovers INT DEFAULT 0,
+    total_fouls INT DEFAULT 0,
+    field_goals_made INT DEFAULT 0,
+    field_goals_attempted INT DEFAULT 0,
+    three_points_made INT DEFAULT 0,
+    three_points_attempted INT DEFAULT 0,
+    free_throws_made INT DEFAULT 0,
+    free_throws_attempted INT DEFAULT 0,
+    offensive_rebounds INT DEFAULT 0,
+    defensive_rebounds INT DEFAULT 0,
+    points_against INT DEFAULT 0,
+    possessions FLOAT DEFAULT 0,
+    seasonal_epiq FLOAT DEFAULT 0,
+    epiq_per_game FLOAT DEFAULT 0,
+    UNIQUE KEY unique_season_year (season_year)
+);
+`);
   const [existingIndexes] = await pool.promise().query(`
   SELECT COUNT(*) AS count
   FROM information_schema.statistics
@@ -136,6 +306,13 @@ async function init() {
   await pool.promise().query(
     'CREATE INDEX idx_players_name ON players(name)'
   );
+  await pool.promise().query(
+    'CREATE INDEX idx_team_position ON player_stats_by_year (team, position);'
+  );
+  await pool.promise().query(
+    'CREATE INDEX idx_season_year_on_average ON average_for_all_players(season_year)'
+  );
+
 
 
   await pool.promise().query(`

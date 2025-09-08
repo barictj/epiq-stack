@@ -56,6 +56,7 @@ export default function PlayerCard({ item, yearStats }: PlayerCardProps) {
                         <span>Assists Per Game</span>
                         <strong>{assistsPerGame}</strong>
                     </div>
+                    
                 </div>
 
                 <div className={styles.cardFooter}>

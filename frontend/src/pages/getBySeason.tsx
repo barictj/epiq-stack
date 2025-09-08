@@ -32,17 +32,27 @@ export default function GetBySeason({ items, year }: { items: any[]; year: numbe
                 return b.yearStats.epiq_per_game - a.yearStats.epiq_per_game;
             });
     }
+    filteredAndSortedItems = filteredAndSortedItems.slice(0, 10);
     return (
         <Container className={styles.mainContainer} fluid>
-            <Row>
-                {filteredAndSortedItems.map(({ player, yearStats }) => (
-                    <PlayerCard
-                        key={`${player.id}-${yearStats.season_year}`}
-                        item={player}
-                        yearStats={yearStats}
-                    />
-                ))}
-            </Row>
+            {filteredAndSortedItems && filteredAndSortedItems.length > 0 ? (
+                <Row>
+                    {filteredAndSortedItems.map(({ player, yearStats }) => (
+                        <PlayerCard
+                            key={`${player.id}-${yearStats.season_year}`}
+                            item={player}
+                            yearStats={yearStats}
+                        />
+                    ))}
+                </Row>
+            ) : (
+                <Row>
+                    <Col>
+                        <h4>No EPIQ data for this year.</h4>
+                    </Col>
+                </Row>
+            )}
         </Container>
-    )
+    );
+
 }

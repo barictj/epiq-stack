@@ -65,3 +65,35 @@ export async function searchPlayersByName(name: string) {
         return null;
     }
 }
+export async function fetchTopPlayers({ year, limit = 25, sortBy = 'efficiency_possession_impact_quotient' }) {
+    const query = new URLSearchParams({
+        year: String(year),
+        limit: String(limit),
+        sortBy
+    });
+
+    const res = await fetch(`${baseUrl}/api/getTopPlayersByYear?${query.toString()}`);
+    if (!res.ok) throw new Error('Failed to fetch top players');
+    return await res.json();
+}
+
+export async function getAverageStatsBySeason(season_year: number) {
+    try {
+        const res = await fetch(`${baseUrl}/api/getAverageStatsBySeason/${season_year}`);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        console.error(`SSR getAverageStatsBySeason error for ${season_year}`, err);
+        return null;
+    }
+}
+export async function getAllAverageStatsBySeason() {
+    try {
+        const res = await fetch(`${baseUrl}/api/getAverageStatsBySeason/`);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        console.error(`SSR getAverageStatsBySeason error for every year`, err);
+        return null;
+    }
+}

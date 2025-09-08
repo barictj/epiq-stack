@@ -3,10 +3,10 @@ const {
     getItems,
     getItem,
     storeItem,
-    updateItem,
     removeItem,
     getJoinedItems,
-    getBySeason
+    getBySeason,
+    getTopPlayersByYear
 } = require('./players');
 const {
     searchPlayersByName
@@ -14,14 +14,20 @@ const {
 const {
     updatePlayerStats
 } = require('./player_stats');
+const { addAverageStatsBySeason, updateAverageStatsBySeason, getAverageStatsBySeason, getAllAverageStatsBySeason } = require('./average_stats_by_year.js');
 module.exports = {
     getItems,
     getItem,
     storeItem,
-    updateItem,
     removeItem,
     getJoinedItems,
     updatePlayerStats,
     getBySeason,
-    searchPlayersByName
+    searchPlayersByName,
+    getTopPlayersByYear,
+    addAverageStatsBySeason,
+    updateAverageStatsBySeason,
+    getAverageStatsBySeason,
+    getAllAverageStatsBySeason
 };
+
