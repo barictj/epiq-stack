@@ -1,0 +1,126 @@
+.topPlayerCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #063849; */
+    color: white;
+    padding: 12px;
+    box-shadow: 0 0 8px rgba(253, 255, 125, 0.4);
+    margin-bottom: 12px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.playerRow {
+    display: flex;
+    align-items: stretch;
+    min-height: 200px;
+    background-color: #063849;
+    box-shadow: 0 0 8px rgba(253, 255, 125, 0.4);
+    margin-bottom: 12px;
+    padding: 10px;
+}
+
+@media (max-width: 800px) {
+    .playerRow {
+        display: flex;
+        align-items: stretch;
+        min-height: 200px;
+        background-color: #063849;
+        box-shadow: 0 0 8px rgba(253, 255, 125, 0.4);
+        margin-bottom: 12px;
+        flex-direction: column;
+    }
+}
+
+.rankCol {
+    color: white;
+    flex: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+}
+
+.avatarCol,
+
+.statsCol {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: white;
+    border: #063849 2px solid;
+
+}
+
+.avatarCol {
+    background-color: white;
+}
+
+.avatar {
+    width: 160px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid #063849;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #eee;
+    font-size: 1.1rem;
+    color: #063849
+}
+
+.nameCol {
+    color: #063849;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: white;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    text-decoration: none !important;
+    border: #063849 2px solid;
+
+}
+
+
+.nameCol:visited {
+    color: #063849;
+    text-decoration: none !important;
+
+}
+
+.nameCol :active {
+    color: #063849;
+    text-decoration: none !important;
+}
+
+.nameCol:link {
+    color: #063849;
+    text-decoration: none !important;
+}
+
+.nameCol:hover a {
+    color: #bb6ab3 !important;
+    text-decoration: none !important;
+}
+
+.nameCol a {
+    color: #063849;
+    text-decoration: none !important;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+}
+
+.nameCol a:hover {
+    color: #063849;
+    text-decoration: underline !important;
+}

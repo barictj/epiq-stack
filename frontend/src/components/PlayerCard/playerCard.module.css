@@ -87,27 +87,53 @@
 }
 
 .playerName {
-    font-size: 28px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #00bfff;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-decoration: none !important;
+}
+
+.playerName a {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 35px;
+    color: #ffffff;
+    text-decoration: none !important;
+}
+
+.playerName:link {
+    color: #eee;
+    text-decoration: none !important;
+
+}
+
+.playerName:visited {
+    color: #eee;
+    text-decoration: none !important;
+
+}
+
+.playerName:hover {
+    color: #bb6ab3 !important;
+    text-decoration: none !important;
 }
 
 .cardStats {
     background: rgba(255, 255, 255, 0.05);
-    padding: 12px;
+    padding: 15px;
     border-radius: 8px;
     display: grid;
     gap: 10px;
     margin-top: 12px;
     z-index: 2;
     position: relative;
+    font-size: 40px;
+
 }
 
 .stat {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 4px;
 }
@@ -144,7 +170,7 @@
 }
 
 .epiqStat {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     background: rgba(0, 191, 255, 0.1);
     border-radius: 6px;
@@ -156,10 +182,12 @@
 .epiqStat span {
     color: #00ffff;
     font-weight: 600;
+    font-size: 30px;
+
 }
 
 .epiqStat strong {
     color: #00ffff;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 700;
 }

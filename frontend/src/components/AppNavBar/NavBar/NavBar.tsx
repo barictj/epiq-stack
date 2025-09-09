@@ -8,6 +8,8 @@ export default function NavBar() {
                 <Nav.Link href="/players">Players</Nav.Link>
                 <Nav.Link href="/getBySeason?year=1979">By Year</Nav.Link>
                 <Nav.Link href="/getAverageBySeason">Average By Year</Nav.Link>
+                <Nav.Link href="/about">About</Nav.Link>
+
             </Nav >
         </>
     )

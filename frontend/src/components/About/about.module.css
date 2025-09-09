@@ -1,0 +1,36 @@
+.aboutSection {
+    background-color: #002b3d;
+    color: #f0f0f0;
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #bb6ab3;
+    margin-top: 10px;
+}

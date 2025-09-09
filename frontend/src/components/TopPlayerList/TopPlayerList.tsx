@@ -11,7 +11,7 @@ export default function TopPlayerList({
         <>
             {topPlayers && topPlayers.length > 0 && (
                 <div style={{ backgroundColor: '#f0f2f5', padding: '20px' }}>
-                    <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>Top Players of 1989</h3>
+
                     <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px' }}>
                         {topPlayers.map((player) => (
                             <div key={player.id} style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '15px', width: '275px', backgroundColor: '#fff' }}>
