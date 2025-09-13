@@ -33,7 +33,7 @@ export default function PerPossessionTable({ stats }: { stats: any[] }) {
                     {stats.map((stat: any, index: number) => (
                         <tr key={`row-${stat.season_year}-${index}`}>
                             <td>
-                                <Link href={`getBySeason?year=${stat.season_year}`}>{stat.season_year}</Link>
+                                <Link href={`getBySeason?year=${stat.season_year}&sortBy=seasonal_epiq&startAt=0&endBy=24&view=table`}>{stat.season_year}</Link>
                             </td>
                             <td>{stat.games_played}</td>
                             <td>{stat.efficiency_possession_impact_quotient?.toFixed(1)}</td>

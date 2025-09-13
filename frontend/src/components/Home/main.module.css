@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+.mainContainer {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+@media (max-width: 800px) {
+    .mainContainer {
+        padding: 0%;
+        max-width: 100%;
+
+    }
+}
+
 .basketballCard {
     font-family: 'Bebas Neue', sans-serif;
     background: linear-gradient(145deg, #0a0a0f, #1a1a2b);

@@ -1,13 +1,43 @@
+.topFiveContainer {
+    background-color: #063849;
+    padding-top: 20px;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.curretLeader {
+    color: white;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white
+}
+
 .topPlayerCol {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: #063849; */
+    /* aligns items horizontally to the right */
+    justify-content: flex-end;
+    /* pushes all items to the bottom vertically */
     color: white;
-    padding: 12px;
-    box-shadow: 0 0 8px rgba(253, 255, 125, 0.4);
-    margin-bottom: 12px;
+    padding-right: 12px;
+    margin-bottom: 0px;
     font-family: 'Bebas Neue', cursive;
+    height: 100%;
+}
+
+.cardWrapper {
+    margin-top: auto;
+    margin-bottom: 12px;
+}
+
+@media (max-width: 800px) {
+    .topPlayerCol {
+        padding: 0;
+    }
 }
 
 .playerRow {
@@ -15,9 +45,12 @@
     align-items: stretch;
     min-height: 200px;
     background-color: #063849;
-    box-shadow: 0 0 8px rgba(253, 255, 125, 0.4);
+    /* box-shadow: 0 0 8px rgba(253, 255, 125, 0.4); */
     margin-bottom: 12px;
-    padding: 10px;
+    padding: 0;
+    padding-bottom: 0%;
+    border: #ccc 4px solid;
+    border-radius: 8px;
 }
 
 @media (max-width: 800px) {
@@ -43,16 +76,33 @@
     font-size: 3rem;
 }
 
-.avatarCol,
+.otherPlayersCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    /* or a fixed height like 100vh if needed */
+}
+
+.avatarCol {
+    flex: 1;
+    display: flex;
+    align-items: self-end;
+    justify-content: center;
+    padding-bottom: 0;
+    background-color: white;
+
+}
 
 .statsCol {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 0;
+    padding-bottom: 0;
     background-color: white;
-    border: #063849 2px solid;
+
 
 }
 
@@ -61,18 +111,22 @@
 }
 
 .avatar {
-    width: 160px;
-    height: 130px;
-    border-radius: 50%;
-    border: 2px solid #063849;
+    /* width: 175px; */
+    height: 175px;
+    border-radius: 4px;
+    /* border: 3px solid #063849; */
 }
 
 .stats {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    gap: 2px;
     color: #eee;
-    font-size: 1.1rem;
+    font-size: 20px;
     color: #063849
 }
 
@@ -80,31 +134,34 @@
     color: #063849;
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 12px;
     background-color: white;
     font-family: 'Bebas Neue', cursive;
-    font-size: 2rem;
+    font-size: 40px;
     text-decoration: none !important;
-    border: #063849 2px solid;
+
 
 }
 
+.teamDiv {
+    font-size: 30px;
+    padding: 12px;
+
+}
 
 .nameCol:visited {
-    color: #063849;
     text-decoration: none !important;
 
 }
 
 .nameCol :active {
-    color: #063849;
     text-decoration: none !important;
 }
 
 .nameCol:link {
-    color: #063849;
     text-decoration: none !important;
 }
 
@@ -114,10 +171,8 @@
 }
 
 .nameCol a {
-    color: #063849;
     text-decoration: none !important;
     font-family: 'Bebas Neue', cursive;
-    font-size: 2rem;
 }
 
 .nameCol a:hover {

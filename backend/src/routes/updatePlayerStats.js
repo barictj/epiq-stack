@@ -25,11 +25,13 @@ module.exports = async (req, res) => {
         possessions,
         points_against,
         seasonal_epiq,
-        epiq_per_game
+        epiq_per_game,
+        team,
+        position,
+        league // ✅ optional from body
     } = req.body;
 
     const item = {
-        id,
         player_id,
         season_year,
         games_played,
@@ -52,12 +54,15 @@ module.exports = async (req, res) => {
         possessions,
         points_against,
         seasonal_epiq,
-        epiq_per_game
+        epiq_per_game,
+        team,
+        position,
+        league: league || 'nba' // ✅ default to NBA
     };
 
     try {
-        await db.player_stats.updatePlayerStats(item); // Assumes you have an updateItem method
-        res.status(200).send({ message: 'Player stats updated', item });
+        await db.player_stats.updatePlayerStats(id, item);
+        res.status(200).send({ message: 'Player stats updated', item: { id, ...item } });
     } catch (error) {
         console.error('Error updating player stats:', error);
         res.status(500).send({ error: 'Failed to update player stats' });

@@ -1,0 +1,31 @@
+.epiqExplainer {
+    padding: 3rem 1rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-top: 35px;
+    border-radius: 10px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.explainerTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #063849;
+    border-bottom: 3px solid #063849;
+    padding-bottom: 5px;
+}
+
+.explainerText {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #444;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import styles from "./homepage_hero.module.css";
 
 const HomepageHero: React.FC = () => {
@@ -11,7 +12,17 @@ const HomepageHero: React.FC = () => {
             <p className={styles.subtext}>
                 Explore the stat that redefines basketball analytics—one possession at a time.
             </p>
-            <button className={styles.cta}>View Leaderboard</button>
+            <div className={styles.homepageHeroButtons}>
+                <button className={styles.cta}>
+                    Leaders By Year
+                </button>
+                <button className={styles.cta}>
+                    League Averages
+                </button>
+                <button className={styles.cta}>
+                    By Season Averages
+                </button>
+            </div>
         </section>
     );
 };

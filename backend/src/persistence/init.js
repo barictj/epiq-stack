@@ -31,13 +31,17 @@ async function init() {
 
   await pool.promise().query(`
   CREATE TABLE IF NOT EXISTS players (
-    id VARCHAR(36) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    team VARCHAR(100),
-    position VARCHAR(50),
-    player_image_url VARCHAR(255),
-    active BOOLEAN DEFAULT 1
-  ) DEFAULT CHARSET=utf8mb4;
+  id VARCHAR(36) PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  team VARCHAR(100),
+  position VARCHAR(50),
+  player_image_url VARCHAR(255),
+  active BOOLEAN DEFAULT 1,
+  total_points_all_time INT DEFAULT 0,
+  seasons_played INT DEFAULT 0,
+  career_epiq FLOAT DEFAULT 0,
+  league VARCHAR(10) DEFAULT 'NBA'
+) DEFAULT CHARSET=utf8mb4;
 `);
 
   await pool.promise().query(`
@@ -68,6 +72,7 @@ async function init() {
     epiq_per_game FLOAT DEFAULT 0,
     team VARCHAR (100) DEFAULT '',
     position VARCHAR(50) DEFAULT '',
+    league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
@@ -97,6 +102,7 @@ async function init() {
     possessions INT DEFAULT 0,
     team VARCHAR(100) DEFAULT '',
       position VARCHAR(50) DEFAULT '',
+      league VARCHAR(10) DEFAULT 'NBA',
 
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
@@ -132,7 +138,7 @@ async function init() {
     points_against INT DEFAULT 0,
     team VARCHAR(100) DEFAULT '',
         position VARCHAR(50) DEFAULT '',
-
+        league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
   ) DEFAULT CHARSET=utf8mb4;
 `);
@@ -164,6 +170,7 @@ async function init() {
     epiq_per_game FLOAT DEFAULT 0,
     team VARCHAR (100) DEFAULT '',
     position VARCHAR(50) DEFAULT '',
+      league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
@@ -196,6 +203,7 @@ async function init() {
     epiq_per_game FLOAT DEFAULT 0,
     team VARCHAR (100) DEFAULT '',
     position VARCHAR(50) DEFAULT '',
+      league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
@@ -228,6 +236,7 @@ async function init() {
     epiq_per_game FLOAT DEFAULT 0,
     team VARCHAR (100) DEFAULT '',
     position VARCHAR(50) DEFAULT '',
+      league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
@@ -260,6 +269,7 @@ async function init() {
     epiq_per_game FLOAT DEFAULT 0,
     team VARCHAR (100) DEFAULT '',
     position VARCHAR(50) DEFAULT '',
+      league VARCHAR(10) DEFAULT 'NBA',
     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE,
     UNIQUE KEY unique_player_season (player_id, season_year)
 );
@@ -290,6 +300,8 @@ async function init() {
     possessions FLOAT DEFAULT 0,
     seasonal_epiq FLOAT DEFAULT 0,
     epiq_per_game FLOAT DEFAULT 0,
+    team VARCHAR (100) DEFAULT '',
+    league VARCHAR(10) DEFAULT 'NBA',
     UNIQUE KEY unique_season_year (season_year)
 );
 `);
@@ -315,52 +327,7 @@ async function init() {
 
 
 
-  await pool.promise().query(`
-  INSERT INTO players (
-  id, name, team, position, player_image_url, active
-) VALUES (
-  'player-jokic',
-  'Nikola Jokic',
-  'Denver Nuggets',
-  'Center',
-  'https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png',
-  true
-);`);
-  await pool.promise().query(`
-  INSERT INTO player_stats_by_year (
-  id, player_id, season_year, games_played,
-  efficiency_possession_impact_quotient,
-  total_points, total_rebounds, total_assists,
-  total_steals, total_blocks, total_turnovers, total_fouls,
-  field_goals_made, field_goals_attempted,
-  three_points_made, three_points_attempted,
-  free_throws_made, free_throws_attempted,
-  offensive_rebounds, defensive_rebounds, points_against
-) VALUES (
-  'stat-jokic-2025',
-  'player-jokic',
-  2025,
-  70,
-  1.98,
-  2071,
-  700,
-  716,
-  90,
-  60,
-  230,
-  140,
-  786,
-  1364,
-  138,
-  331,
-  361,
-  451,
-  200,
-  500,
-  108
-);
 
-`);
 
 
   console.log('✅ Tables initialized');

@@ -2,19 +2,29 @@
 
 .basketballCard {
     font-family: 'Bebas Neue', sans-serif;
-    background: linear-gradient(145deg, #0a0a0f, #1a1a2b);
+    /* background: linear-gradient(145deg, #0a0a0f, #1a1a2b); */
     border: 4px solid #00bfff;
     border-radius: 16px;
-    padding: 20px;
-    max-width: 360px;
+    padding: 50px;
+    padding-bottom: 20px;
+    min-width: 350px;
+    max-width: 375px;
     margin: auto;
     color: #fff;
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 191, 255, 0.6);
+    /* box-shadow: 0 8px 24px rgba(0, 191, 255, 0.6); */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     will-change: transform, box-shadow;
+}
+
+@media (max-width: 800px) {
+    .basketballCard {
+
+        max-width: 95%;
+
+    }
 }
 
 .basketballCard:hover {
@@ -77,13 +87,21 @@
 }
 
 .playerImage {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #00bfff;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+    border-radius: 25%;
+    /* border: 4px solid #00bfff; */
+    /* box-shadow: 0 0 20px rgba(0, 191, 255, 0.6); */
     margin-bottom: 12px;
+}
+
+@media (max-width: 800px) {
+    .playerImage {
+
+        max-width: 100%;
+
+    }
 }
 
 .playerName {
@@ -130,6 +148,16 @@
 
 }
 
+@media (max-width: 800px) {
+    .cardStats {
+
+        font-size: 15px;
+
+    }
+}
+
+
+
 .stat {
     display: flex;
     justify-content: space-between;
@@ -144,6 +172,12 @@
 
 .stat strong {
     color: #00ffff;
+}
+
+@media (max-width: 800px) {
+    .stat {
+        font-size: 15px;
+    }
 }
 
 .cardFooter {
@@ -162,11 +196,14 @@
 .team {
     font-weight: bold;
     color: #00bfff;
+    font-size: 30px;
+
 }
 
 .position {
     font-weight: bold;
     color: #00ffff;
+    font-size: 30px;
 }
 
 .epiqStat {

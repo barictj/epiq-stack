@@ -22,7 +22,13 @@ module.exports = async (req, res) => {
         free_throws_attempted,
         offensive_rebounds,
         defensive_rebounds,
-        points_against
+        possessions,
+        points_against,
+        seasonal_epiq,
+        epiq_per_game,
+        team,
+        position,
+        league // ✅ optional from body
     } = req.body;
 
     const item = {
@@ -46,11 +52,17 @@ module.exports = async (req, res) => {
         free_throws_attempted,
         offensive_rebounds,
         defensive_rebounds,
-        points_against
+        possessions,
+        points_against,
+        seasonal_epiq,
+        epiq_per_game,
+        team,
+        position,
+        league: league || 'nba' // ✅ default to NBA
     };
 
     try {
-        await db.player_stats.updateItem(item); // Assumes you have an updateItem method
+        await db.player_stats.addPlayerStats(item);
         res.status(200).send({ message: 'Player stats updated', item });
     } catch (error) {
         console.error('Error updating player stats:', error);

@@ -19,6 +19,7 @@ export async function getServerSideProps(context: any) {
             encrichedPlayer
         }
     };
+
 }
 export default function getByPlayer({
     encrichedPlayer
@@ -29,7 +30,7 @@ export default function getByPlayer({
         <main style={{ backgroundColor: '#f0f2f5', paddingTop: '20px', minHeight: '100vh' }}>
             <Container>
                 <PlayerHeader player={encrichedPlayer} />
-                <PlayerStatsTable playerStats={encrichedPlayer.yearStats} />
+                <PlayerStatsTable playerStats={[...encrichedPlayer.yearStats].reverse()} />
             </Container>
         </main >
     )

@@ -4,8 +4,9 @@ function normalize(row) {
     return { ...row };
 }
 
-
 async function addAverageStatsBySeason(year) {
+    const league = year.league || 'nba';
+
     await pool.promise().query(
         `INSERT INTO average_for_all_players (
       id,
@@ -30,8 +31,9 @@ async function addAverageStatsBySeason(year) {
       possessions,
       points_against,
       seasonal_epiq,
-      epiq_per_game
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      epiq_per_game,
+      league
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
             year.id,
             year.season_year,
@@ -55,13 +57,15 @@ async function addAverageStatsBySeason(year) {
             year.possessions,
             year.points_against,
             year.seasonal_epiq,
-            year.epiq_per_game
+            year.epiq_per_game,
+            league
         ]
     );
 }
 
-
 async function updateAverageStatsBySeason(year) {
+    const league = year.league || 'nba';
+
     await pool.promise().query(
         `UPDATE average_for_all_players SET
       games_played = ?,
@@ -85,8 +89,7 @@ async function updateAverageStatsBySeason(year) {
       points_against = ?,
       seasonal_epiq = ?,
       epiq_per_game = ?
-    WHERE season_year = ?
-    `,
+    WHERE season_year = ? AND league = ?`,
         [
             year.games_played,
             year.efficiency_possession_impact_quotient,
@@ -109,31 +112,30 @@ async function updateAverageStatsBySeason(year) {
             year.points_against,
             year.seasonal_epiq,
             year.epiq_per_game,
-            year.season_year
+            year.season_year,
+            league
         ]
     );
 }
 
-
-async function getAverageStatsBySeason(year) {
-    // Fetch league-wide average stats for a given season
+async function getAverageStatsBySeason(year, league = 'nba') {
     const [stats] = await pool.promise().query(
-        'SELECT * FROM average_for_all_players WHERE season_year = ?',
-        [year]
+        'SELECT * FROM average_for_all_players WHERE season_year = ? AND league = ? ORDER BY season_year DESC',
+        [year, league]
     );
 
     return {
         averageYearStats: stats.map(normalize)
     };
-
 }
+
 async function getAllAverageStatsBySeason() {
-    // Fetch league-wide average stats for a given season
     const [stats] = await pool.promise().query(
-        'SELECT * FROM average_for_all_players ORDER BY season_year DESC',
+        'SELECT * FROM average_for_all_players ORDER BY season_year DESC'
     );
     return stats.map(normalize);
 }
+
 module.exports = {
     updateAverageStatsBySeason,
     addAverageStatsBySeason,

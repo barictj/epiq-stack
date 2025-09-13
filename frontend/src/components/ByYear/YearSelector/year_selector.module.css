@@ -1,0 +1,43 @@
+/* YearSelector.module.css */
+
+.container {
+    width: 100%;
+    background: linear-gradient(to bottom, #063849, #021116);
+    color: white;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.link {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: #13161b;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border: 2px solid white;
+}
+
+.link:hover {
+    background-color: #2563eb;
+}
+
+.selected {
+    background-color: #3b82f6;
+}

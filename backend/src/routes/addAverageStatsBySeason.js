@@ -25,7 +25,8 @@ module.exports = async (req, res) => {
         possessions: req.body.possessions,
         points_against: req.body.points_against,
         seasonal_epiq: req.body.seasonal_epiq,
-        epiq_per_game: req.body.epiq_per_game
+        epiq_per_game: req.body.epiq_per_game,
+        league: req.body.league || 'nba' // ✅ Default to NBA
     };
 
     try {

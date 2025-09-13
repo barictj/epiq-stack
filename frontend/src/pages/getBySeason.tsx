@@ -1,58 +1,53 @@
-import Home from '@components/Home/Home';
-import PlayerCard from '@components/PlayerCard/PlayerCard';
+import TopPlayerList from '@components/TopPlayerList/TopPlayerList';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import styles from '../components/Home/main.module.css';
-import { fetchAllStatsByYear } from '../components/serverApi';
+import { fetchTopPlayers } from '../components/serverApi';
+import ByYearHome from '@components/ByYear/ByYearHome';
 
 export async function getServerSideProps(context: any) {
-    const year = context.query.year || 1979;
-    const items = await fetchAllStatsByYear(year);
+    const {
+        year = 1989,
+        sortBy = 'seasonal_epiq',
+        startAt = 0,
+        endBy = 24,
+        direction = 'DESC',
+    } = context.query;
+    const topPlayers = await fetchTopPlayers({
+        year: Number(year),
+        sortBy: String(sortBy),
+        startAt: Number(startAt),
+        endBy: Number(endBy),
+        direction: String(direction),
+    });
 
-    return { props: { items, year } };
+    return {
+        props: {
+            topPlayers,
+            year: Number(year),
+            sortBy: String(sortBy),
+            direction: String(direction).toUpperCase() === 'ASC' ? 'ASC' : 'DESC',
+        },
+    };
 }
 
-export default function GetBySeason({ items, year }: { items: any[]; year: number }) {
-    const minPossessions = 1000;
-    const sortByEPIQ = true;
-    items.forEach(({ player, yearStats }) => {
-        const possessions = parseFloat(yearStats.possessions ?? "0");
-    });
-    let filteredAndSortedItems = [];
-    if (Array.isArray(items)) {
-        filteredAndSortedItems = items
-            .filter(({ yearStats }) => {
-                const possessions = parseFloat(yearStats.possessions ?? "0");
-                return possessions > minPossessions;
-            })
-            .sort((a, b) => {
-                if (!sortByEPIQ) return 0;
-                return b.yearStats.epiq_per_game - a.yearStats.epiq_per_game;
-            });
-    }
-    filteredAndSortedItems = filteredAndSortedItems.slice(0, 10);
+export default function Index({
+    topPlayers,
+    year,
+    sortBy,
+    direction,
+}: {
+    topPlayers: any[];
+    year: number;
+    sortBy: string;
+    direction: 'ASC' | 'DESC';
+}) {
     return (
-        <Container className={styles.mainContainer} fluid>
-            {filteredAndSortedItems && filteredAndSortedItems.length > 0 ? (
-                <Row>
-                    {filteredAndSortedItems.map(({ player, yearStats }) => (
-                        <PlayerCard
-                            key={`${player.id}-${yearStats.season_year}`}
-                            item={player}
-                            yearStats={yearStats}
-                        />
-                    ))}
-                </Row>
-            ) : (
-                <Row>
-                    <Col>
-                        <h4>No EPIQ data for this year.</h4>
-                    </Col>
-                </Row>
-            )}
-        </Container>
+        <>
+            <ByYearHome
+                items={topPlayers}
+                year={year}
+                sortBy={sortBy}
+                direction={direction}
+            />
+        </>
     );
-
 }

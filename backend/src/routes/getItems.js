@@ -1,8 +1,10 @@
 const db = require('../persistence');
 
 module.exports = async (req, res) => {
+    const league = req.query.league || 'nba'; // ✅ Default to NBA
+
     try {
-        const items = await db.players.getItems();
+        const items = await db.players.getItems(league); // ✅ Pass league to backend
         res.json(items);
     } catch (err) {
         console.error('API error:', err);

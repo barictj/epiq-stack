@@ -65,13 +65,20 @@ export async function searchPlayersByName(name: string) {
         return null;
     }
 }
-export async function fetchTopPlayers({ year, limit = 25, sortBy = 'efficiency_possession_impact_quotient' }) {
+export async function fetchTopPlayers({
+    year,
+    startAt = 0,
+    endBy = 25,
+    sortBy = 'efficiency_possession_impact_quotient',
+    direction = 'DESC'
+}) {
     const query = new URLSearchParams({
         year: String(year),
-        limit: String(limit),
-        sortBy
+        startAt: String(startAt),
+        endBy: String(endBy),
+        sortBy,
+        direction
     });
-
     const res = await fetch(`${baseUrl}/api/getTopPlayersByYear?${query.toString()}`);
     if (!res.ok) throw new Error('Failed to fetch top players');
     return await res.json();

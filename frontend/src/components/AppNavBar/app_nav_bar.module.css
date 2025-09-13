@@ -4,7 +4,7 @@
     /* Dark background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* Subtle shadow for depth */
-    background-color: #063849 !important;
+    background: linear-gradient(to bottom, #063849, #021116);
     color: white !important;
     font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif !important;
     font-size: 15px !important;

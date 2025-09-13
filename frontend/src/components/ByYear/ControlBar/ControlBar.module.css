@@ -1,0 +1,56 @@
+.controlBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: #111827;
+    color: white;
+    border-radius: 6px;
+}
+
+.selectorGroup,
+.paginationGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.selectorGroup span,
+.paginationGroup span {
+    font-weight: 500;
+    color: #9ca3af;
+}
+
+.link {
+    text-decoration: none;
+    color: #e5e7eb;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.link:hover {
+    background-color: #021116;
+}
+
+.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.pageInfo {
+    font-size: 0.9rem;
+    color: #e5e7eb;
+}
+
+.dropdown {
+    background-color: #1f2937;
+    color: white;
+    border: 1px solid #374151;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}

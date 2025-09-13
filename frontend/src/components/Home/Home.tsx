@@ -6,23 +6,25 @@ import PlayerCard from '@components/PlayerCard/PlayerCard';
 import HomepageHero from './HomePageHero/HomePageHero';
 import TopPlayerList from '@components/TopPlayerList/TopPlayerList';
 import TopFive from '@components/TopFive/TopFive';
+import EpiqExplainer from './HomePageExplainer/EpiqExplainer';
 const TARGET_SEASON = 1978;
 
 export default function Home({ items }: { items: any[] }) {
 
-    const TopFivePlayers = items.slice(0, 5)
-    const remainingPlayers = items.slice(5);
+    const TopFivePlayers = items
+    const remainingPlayers = items.slice(25);
     return (
         <Container className={styles.mainContainer} fluid>
             <Row>
                 <HomepageHero />
+                <EpiqExplainer />
             </Row>
             <Row >
-                <h2 className={styles.title}>🏆 Top 5 EPIQ Per Game Leaders</h2>
-                <TopFive players={TopFivePlayers} />
+
+                <TopFive players={items} />
             </Row>
 
-            <Row fluid>
+            <Row>
                 <TopPlayerList topPlayers={remainingPlayers} />
                 <Col>
                     <h1>✅ next</h1>

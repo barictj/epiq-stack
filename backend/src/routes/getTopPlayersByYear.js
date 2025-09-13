@@ -1,7 +1,14 @@
 const db = require('../persistence');
 
 module.exports = async (req, res) => {
-    const { year, limit = 25, sortBy = 'efficiency_possession_impact_quotient' } = req.query;
+    const {
+        year,
+        startAt = 0,
+        endBy = 24,
+        sortBy = 'efficiency_possession_impact_quotient',
+        direction = 'DESC',
+        league = 'nba' // ✅ Default to NBA
+    } = req.query;
 
     if (!year) {
         return res.status(400).json({ error: 'Missing required parameter: year' });
@@ -10,8 +17,11 @@ module.exports = async (req, res) => {
     try {
         const topPlayers = await db.players.getTopPlayersByYear({
             year: parseInt(year, 10),
-            limit: parseInt(limit, 10),
-            sortBy
+            startAt: parseInt(startAt, 10),
+            endBy: parseInt(endBy, 10),
+            sortBy,
+            direction,
+            league // ✅ Pass league to backend
         });
 
         res.json(topPlayers);

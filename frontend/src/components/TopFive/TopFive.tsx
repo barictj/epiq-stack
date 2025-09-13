@@ -27,11 +27,9 @@ interface TopFiveListProps {
 export default function TopFive({ players }: TopFiveListProps) {
     if (!players || players.length === 0) return null;
 
-    const topFive = players.slice(0, 5);
-    console.log("🏆 Top Five Players:", topFive);
+    const topFive = players.slice(0, 25);
+
     return (
-        <Container fluid>
-            <TopFiveListComponent topFive={topFive} />
-        </Container>
+        <TopFiveListComponent topFive={topFive} />
     );
 }

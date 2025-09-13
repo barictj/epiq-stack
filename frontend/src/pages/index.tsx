@@ -1,18 +1,16 @@
 
 
-import TopPlayerList from '@components/TopPlayerList/TopPlayerList';
-
+import { useLeague } from '../context/LeagueContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { fetchTopPlayers } from '../components/serverApi';
 import Home from '@components/Home/Home';
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
 
-
+    const league = context.query.league || 'NBA';
     // Optionally fetch top players (e.g., for leaderboard or featured section)
-    const topPlayers = await fetchTopPlayers({ year: 1989, limit: 20, sortBy: 'epiq_per_game' });
-
+    const topPlayers = await fetchTopPlayers({ year: 1999, limit: 50, sortBy: 'epiq_per_game' });
 
     return {
         props: {
@@ -28,7 +26,7 @@ export default function Index({
     topPlayers: any[];
 }) {
 
-    const topFive = topPlayers.slice(0, 5);
+    const topFive = topPlayers.slice(0, 30);
     const topNotFive = topPlayers.slice(5);
     return (
         <>

@@ -19,3 +19,35 @@
     color: #063849 !important;
     font-weight: bold !important;
 }
+
+.statsWrapper {
+    margin-top: 2rem;
+}
+
+.selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.selector button {
+    padding: 0.5rem 1rem;
+    font-size: 25px;
+    background: #063849;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    color: white
+}
+
+.selector button:hover {
+    background: #0f0f0f;
+}
+
+.selector .active {
+    background: #333;
+
+    color: #fff;
+}

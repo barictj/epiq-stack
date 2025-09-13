@@ -14,6 +14,44 @@
     font-family: 'Bebas Neue', cursive;
     font-size: 48px;
     color: #063849;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     margin-top: 35px;
+}
+
+.subTitle {
+    color: #063849;
+
+}
+
+.headerRow {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.careerSummary {
+    font-size: 1rem;
+    color: #555;
+    margin-left: 20px;
+    margin-top: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.statsRight {
+    text-align: right;
+    align-items: right;
+    justify-content: right;
+    align-self: flex-start;
+
+
+}
+
+.statsDiv {
+    font-size: 18px;
+    margin-top: 8px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }

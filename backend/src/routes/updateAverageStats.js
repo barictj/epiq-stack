@@ -2,6 +2,7 @@ const db = require('../persistence/players/average_stats_by_year.js');
 
 module.exports = async (req, res) => {
     const season_year = parseInt(req.params.season_year);
+    const league = req.body.league || 'nba'; // ✅ Default to NBA
 
     const item = {
         season_year,
@@ -25,7 +26,8 @@ module.exports = async (req, res) => {
         possessions: req.body.possessions,
         points_against: req.body.points_against,
         seasonal_epiq: req.body.seasonal_epiq,
-        epiq_per_game: req.body.epiq_per_game
+        epiq_per_game: req.body.epiq_per_game,
+        league // ✅ Injected into update payload
     };
 
     try {

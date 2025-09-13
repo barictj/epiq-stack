@@ -1,0 +1,55 @@
+.tableContainer {
+    overflow-x: auto;
+    margin-top: 2rem;
+}
+
+.statsTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background-color: #1f2937;
+    color: white;
+}
+
+.statsTable th,
+.statsTable td {
+    padding: 0.75rem;
+    border: 1px solid #374151;
+    text-align: center;
+}
+
+.statsTable th {
+    background-color: #111827;
+    font-weight: 600;
+}
+
+.statsTable tr:hover {
+    background-color: #2d3748;
+}
+
+.playerLink {
+    color: white;
+    text-decoration: none !important;
+}
+
+.playerLink:hover {
+    text-decoration: underline !important;
+}
+
+.playerLink:visited {
+    text-decoration: none !important;
+}
+
+.playerCell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
