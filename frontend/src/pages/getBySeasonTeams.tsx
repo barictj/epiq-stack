@@ -2,8 +2,8 @@ import TopPlayerList from '@components/TopPlayerList/TopPlayerList';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchTopPlayers } from '../components/serverApi';
-import ByYearHome from '@components/ByYear/ByYearHome';
+import { fetchTopTeams } from '../components/serverApi';
+import TeamsBySeason from '@components/TeamsBySeason/TeamsBySeason';
 
 export async function getServerSideProps(context: any) {
     const {
@@ -15,7 +15,7 @@ export async function getServerSideProps(context: any) {
         direction = 'DESC',
     } = context.query;
 
-    const topPlayers = await fetchTopPlayers({
+    const topTeams = await fetchTopTeams({
         league: String(league),
 
         year: Number(year),
@@ -24,10 +24,10 @@ export async function getServerSideProps(context: any) {
         endBy: Number(endBy),
         direction: String(direction),
     });
-
+    console.log(context.query);
     return {
         props: {
-            topPlayers,
+            topTeams,
             year: Number(year),
             sortBy: String(sortBy),
             direction: String(direction).toUpperCase() === 'ASC' ? 'ASC' : 'DESC',
@@ -37,15 +37,17 @@ export async function getServerSideProps(context: any) {
 }
 
 export default function Index({
-    topPlayers,
+    topTeams,
     year,
     sortBy,
     direction,
+    league
 }: {
-    topPlayers: any[];
+    topTeams: any[];
     year: number;
     sortBy: string;
     direction: 'ASC' | 'DESC';
+    league: string;
 }) {
     const searchParams = useSearchParams();
     const startAt = Number(searchParams.get('startAt') ?? 0);
@@ -60,13 +62,21 @@ export default function Index({
     };
     return (
         <>
-            <ByYearHome
-                items={topPlayers}
-                year={year}
-                sortBy={sortBy}
-                direction={direction}
-                seasonSelector={true}
-            />
+            <h1>Top Teams for {year}</h1>
+            {topTeams.length > 0 ? (
+                <TeamsBySeason
+                    teams={topTeams}
+                    direction={direction}
+                    seasonSelector={true}
+                    year={year}
+                    league={league}
+                />
+            ) : (
+                <div className="alert alert-warning mt-3">
+                    No team data available for {league} in {year}.
+                </div>
+            )}
         </>
     );
+
 }

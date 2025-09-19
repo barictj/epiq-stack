@@ -1,34 +1,19 @@
-const { get } = require('http');
-const {
-    getItems,
-    getItem,
-    storeItem,
-    removeItem,
-    getJoinedItems,
-    getBySeason,
-    getTopPlayersByYear
-} = require('./players');
-const {
-    searchPlayersByName
-} = require('./player_search');
-const {
-    updatePlayerStats, addPlayerStats
-} = require('./player_stats');
+const { getTeam, getTeams, updateTeam, getBySeason, getJoinedItems, getTopTeamsByYear, storeTeam } = require('./backend/teams.js');
+const { updateTeamStats, addTeamStats } = require('./backend/team_stats.js');
 const { addAverageStatsBySeason, updateAverageStatsBySeason, getAverageStatsBySeason, getAllAverageStatsBySeason } = require('./average_stats_by_year.js');
 module.exports = {
-    getItems,
-    getItem,
-    storeItem,
-    removeItem,
-    getJoinedItems,
-    updatePlayerStats,
+    getTeam,
+    getTeams,
+    updateTeam,
     getBySeason,
-    searchPlayersByName,
-    getTopPlayersByYear,
+    getJoinedItems,
+    getTopTeamsByYear,
+    storeTeam,
+    addTeamStats,
+    updateTeamStats,
     addAverageStatsBySeason,
     updateAverageStatsBySeason,
     getAverageStatsBySeason,
-    getAllAverageStatsBySeason,
-    addPlayerStats
+    getAllAverageStatsBySeason
 };
 

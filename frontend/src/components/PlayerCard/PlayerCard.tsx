@@ -43,7 +43,7 @@ export default function PlayerCard({ item, yearStats }: PlayerCardProps) {
                     className={styles.playerImage}
                 />
                 <h2 className={styles.playerName}>
-                    <Link href={`/getByPlayer?id=${item.id}`} style={{ color: colors.text }}>
+                    <Link href={`/getByPlayer?id=${item.id}&league=${item.league}`} style={{ color: colors.text }}>
                         {item.name}
                     </Link>
                 </h2>

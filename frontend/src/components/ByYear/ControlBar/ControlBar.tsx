@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import styles from './ControlBar.module.css';
 
 const SORT_LABELS: Record<string, string> = {
@@ -27,15 +26,22 @@ const SORT_LABELS: Record<string, string> = {
     defensive_rebounds: 'Defensive Rebounds',
 };
 
-
-export default function ControlBar() {
+export default function ControlBar({
+    view,
+    setView,
+}: {
+    view: 'table' | 'graphic';
+    setView: (v: 'table' | 'graphic') => void;
+}) {
     const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
+    const league = searchParams.get('league') || 'NBA'; // fallback to NBA if missing
 
     const year = Number(searchParams.get('year') ?? 1989);
     const sortBy = searchParams.get('sortBy') ?? 'seasonal_epiq';
     const startAt = Number(searchParams.get('startAt') ?? 0);
     const endBy = Number(searchParams.get('endBy') ?? 24);
-    const view = searchParams.get('view') ?? 'table';
     const pageSize = endBy - startAt + 1;
 
     const nextStart = startAt + pageSize;
@@ -44,25 +50,35 @@ export default function ControlBar() {
     const prevEnd = prevStart + pageSize - 1;
 
     const buildQuery = (params: Record<string, string | number>) =>
-        `/getBySeason?${new URLSearchParams(params).toString()}`;
-
+        `${pathname}?${new URLSearchParams(params).toString()}`;
     return (
         <div className={styles.controlBar}>
             {/* View Selector */}
             <div className={styles.selectorGroup}>
-                <span>View:</span>
-                <Link
-                    href={buildQuery({ year, sortBy, startAt, endBy, view: 'table' })}
-                    className={`${styles.link} ${view === 'table' ? styles.active : ''}`}
+
+                <span
+                    className={`${styles.link} ${view === 'table' ? styles.active : ''
+                        } `}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                        setView('table');
+                        // router.push(buildQuery({ year, sortBy, startAt, endBy }));
+                    }}
                 >
                     Table
-                </Link>
-                <Link
-                    href={buildQuery({ year, sortBy, startAt, endBy, view: 'graphic' })}
-                    className={`${styles.link} ${view === 'graphic' ? styles.active : ''}`}
+                </span>
+                <span
+                    className={`${styles.link} ${view === 'graphic' ? styles.active : ''} `}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                        setView('graphic');
+                        // router.push(buildQuery({ year, sortBy, startAt, endBy }));
+                    }}
                 >
                     Graphic
-                </Link>
+                </span>
             </div>
 
             {/* Sort Selector */}
@@ -73,7 +89,7 @@ export default function ControlBar() {
                     value={sortBy}
                     onChange={(e) => {
                         const newSort = e.target.value;
-                        window.location.href = buildQuery({ year, sortBy: newSort, startAt, endBy, view });
+                        router.push(buildQuery({ year, sortBy: newSort, startAt, endBy, league }));
                     }}
                 >
                     {Object.entries(SORT_LABELS).map(([key, label]) => (
@@ -90,13 +106,15 @@ export default function ControlBar() {
                 {[25, 50, 100].map((size) => {
                     const newEnd = startAt + size - 1;
                     return (
-                        <Link
+                        <span
                             key={size}
-                            href={buildQuery({ year, sortBy, startAt, endBy: newEnd, view })}
-                            className={`${styles.link} ${pageSize === size ? styles.active : ''}`}
+                            className={`${styles.link} ${pageSize === size ? styles.active : ''} `}
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => router.push(buildQuery({ year, sortBy, startAt, endBy: newEnd }))}
                         >
                             {size}
-                        </Link>
+                        </span>
                     );
                 })}
             </div>
@@ -104,22 +122,26 @@ export default function ControlBar() {
             {/* Pagination */}
             <div className={styles.paginationGroup}>
                 {startAt > 0 && (
-                    <Link
-                        href={buildQuery({ year, sortBy, startAt: prevStart, endBy: prevEnd, view })}
+                    <span
                         className={styles.link}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => router.push(buildQuery({ year, sortBy, startAt: prevStart, endBy: prevEnd }))}
                     >
                         ◀ Prev
-                    </Link>
+                    </span>
                 )}
                 <span className={styles.pageInfo}>
                     {startAt + 1}–{endBy + 1}
                 </span>
-                <Link
-                    href={buildQuery({ year, sortBy, startAt: nextStart, endBy: nextEnd, view })}
+                <span
                     className={styles.link}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => router.push(buildQuery({ year, sortBy, startAt: nextStart, endBy: nextEnd }))}
                 >
                     Next ▶
-                </Link>
+                </span>
             </div>
         </div>
     );

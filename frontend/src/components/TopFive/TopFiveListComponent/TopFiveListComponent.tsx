@@ -86,7 +86,7 @@ export default function TopFiveListComponent({ topFive }: TopFiveListProps) {
                                 <div className={styles.nameCol} style={{
                                     background: colors.bg, color: colors.text
                                 }}><div>
-                                        <Link href={`/getByPlayer?id=${player.player.id}`} className={styles.name} style={{
+                                        <Link href={`/getByPlayer?id=${player.player.id}&league=${player.player.league}`} className={styles.name} style={{
                                             background: colors.bg, color: colors.text
                                         }}>
                                             {player.player.name}

@@ -10,13 +10,22 @@ const LeagueContext = createContext<{
     setLeague: () => { },
 });
 
-export const LeagueProvider = ({ children }: { children: React.ReactNode }) => {
-    const [league, setLeague] = useState<League>('NBA');
+export function LeagueProvider({
+    children,
+    initialLeague = 'NBA',
+}: {
+    children: React.ReactNode;
+    initialLeague?: League;
+}) {
+    const [league, setLeague] = useState<League>(initialLeague);
+
     return (
         <LeagueContext.Provider value={{ league, setLeague }}>
             {children}
         </LeagueContext.Provider>
     );
-};
+}
 
-export const useLeague = () => useContext(LeagueContext);
+export function useLeague() {
+    return useContext(LeagueContext);
+}

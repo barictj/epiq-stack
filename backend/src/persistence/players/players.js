@@ -25,6 +25,7 @@ async function updatePlayer(id, fields) {
 }
 
 async function getItem(id, league = 'nba') {
+    console.log('getItem player with ID:', id, 'and league:', league);
     const [rows] = await pool.promise().query(
         'SELECT * FROM players WHERE id = ? AND league = ?',
         [id, league]

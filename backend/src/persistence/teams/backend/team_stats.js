@@ -1,11 +1,16 @@
-const pool = require('../pool');
+const pool = require('../../pool');
 
-async function addPlayerStats(item) {
+async function addTeamStats(item) {
+    console.log(item)
     await pool.promise().query(
-        `INSERT INTO player_stats_by_year (
+        `INSERT INTO team_stats_by_year (
             id,
-            player_id,
+            team_id,
+            team_name,
             season_year,
+            league,
+            wins,
+            losses,
             games_played,
             efficiency_possession_impact_quotient,
             total_points,
@@ -26,11 +31,15 @@ async function addPlayerStats(item) {
             possessions,
             points_against,
             seasonal_epiq,
-            epiq_per_game,
-            team,
-            position
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            epiq_per_game           
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
+            team_id = VALUES(team_id),
+            team_name = VALUES(team_name),
+            season_year = VALUES(season_year),
+            league = VALUES(league),
+            wins = VALUES(wins),
+            losses = VALUES(losses),
             games_played = VALUES(games_played),
             efficiency_possession_impact_quotient = VALUES(efficiency_possession_impact_quotient),
             total_points = VALUES(total_points),
@@ -51,14 +60,16 @@ async function addPlayerStats(item) {
             possessions = VALUES(possessions),
             points_against = VALUES(points_against),
             seasonal_epiq = VALUES(seasonal_epiq),
-            epiq_per_game = VALUES(epiq_per_game),
-            team = VALUES(team),
-            position = VALUES(position)
+            epiq_per_game = VALUES(epiq_per_game)
         `,
         [
             item.id,
-            item.player_id,
+            item.team_id,
+            item.team_name,
             item.season_year,
+            item.league,
+            item.wins || 0,
+            item.losses || 0,
             item.games_played,
             item.efficiency_possession_impact_quotient,
             item.total_points,
@@ -79,18 +90,22 @@ async function addPlayerStats(item) {
             item.possessions,
             item.points_against,
             item.seasonal_epiq,
-            item.epiq_per_game,
-            item.team,
-            item.position
+            item.epiq_per_game
         ]
 
     );
 }
-async function updatePlayerStats(id, item) {
+async function updateTeamStats(id, item) {
+    console.log(item)
+
     await pool.promise().query(
-        `UPDATE player_stats_by_year SET
-            player_id = ?,
+        `UPDATE team_stats_by_year SET
+            team_id = ?,
+            team_name = ?,
             season_year = ?,
+            league = ?,
+            wins = ?,
+            losses = ?,
             games_played = ?,
             efficiency_possession_impact_quotient = ?,
             total_points = ?,
@@ -111,13 +126,15 @@ async function updatePlayerStats(id, item) {
             possessions = ?,
             points_against = ?,
             seasonal_epiq = ?,
-            epiq_per_game = ?,
-            team = ?,
-            position = ?
+            epiq_per_game = ?
         WHERE id = ?`,
         [
-            item.player_id,
+            item.team_id,
+            item.team_name,
             item.season_year,
+            item.league,
+            item.wins || 0,
+            item.losses || 0,
             item.games_played,
             item.efficiency_possession_impact_quotient,
             item.total_points,
@@ -139,8 +156,8 @@ async function updatePlayerStats(id, item) {
             item.points_against,
             item.seasonal_epiq,
             item.epiq_per_game,
-            item.team,
-            item.position,
+
+
             id // ← used in WHERE clause
         ]
     );
@@ -149,6 +166,6 @@ async function updatePlayerStats(id, item) {
 
 module.exports = {
 
-    addPlayerStats,
-    updatePlayerStats
+    addTeamStats,
+    updateTeamStats
 };

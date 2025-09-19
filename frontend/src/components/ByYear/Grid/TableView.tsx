@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/router';
 import styles from './TableView.module.css';
-
+import { usePathname, useSearchParams } from 'next/navigation';
 interface Player {
     id: string;
     name: string;
@@ -48,8 +48,12 @@ export default function TableView({
     sortBy: string;
     direction: 'ASC' | 'DESC';
 }) {
-    const router = useRouter();
+    const searchParams = useSearchParams();
+    const league = searchParams.get('league') || 'NBA'; // fallback to NBA if missing
 
+    const router = useRouter();
+    const pathname = usePathname();
+    console.log(year)
     const handleSortClick = (field: string) => {
         const isActive = sortBy === field;
         const nextDirection = isActive
@@ -57,7 +61,7 @@ export default function TableView({
             : 'DESC'; // default to DESC on first click
 
         router.push({
-            pathname: '/getBySeason',
+            pathname: pathname,
             query: {
                 year,
                 sortBy: field,
@@ -65,6 +69,7 @@ export default function TableView({
                 startAt: 0,
                 endBy: 24,
                 view: 'table',
+                league,
             },
         });
     };
@@ -115,7 +120,7 @@ export default function TableView({
                     {data.map((p) => (
                         <tr key={p.id}>
                             <td>
-                                <a href={`/getByPlayer?id=${p.player.id}`} className={styles.playerLink}>
+                                <a href={`/getByPlayer?id=${p.player.id}&league=${p.league}`} className={styles.playerLink}>
                                     {p.player.name}
                                 </a>
                             </td>

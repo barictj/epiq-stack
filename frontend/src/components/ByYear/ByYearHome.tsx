@@ -20,42 +20,50 @@ import styles from './by_year.module.css';
 export default function ByYearHome({
     items,
     direction,
+    seasonSelector,
+    year,
 }: {
     items: any[];
     direction: 'ASC' | 'DESC';
+    seasonSelector: boolean;
+    year: number;
 }) {
     const searchParams = useSearchParams();
 
-    const year = Number(searchParams.get('year') ?? 1989);
     const sortBy = searchParams.get('sortBy') ?? 'efficiency_possession_impact_quotient';
     const startAt = Number(searchParams.get('startAt') ?? 0);
     const endBy = Number(searchParams.get('endBy') ?? 24);
-    const initialView = searchParams.get('view') ?? 'table';
+    const [view, setView] = useState<'table' | 'graphic'>('table');
 
-    const [view, setView] = useState<'table' | 'graphic'>(
-        initialView === 'graphic' ? 'graphic' : 'table'
-    );
+    const initialView = searchParams.get('view') ?? 'table';
+    useEffect(() => {
+        if (seasonSelector) {
+            setView(initialView === 'graphic' ? 'graphic' : 'table');
+        } else {
+            setView('graphic');
+        }
+    }, [seasonSelector, initialView]);
+
 
     const TopFivePlayers = items.slice(0, 5);
     const remainingPlayers = items.slice(5);
 
-    const handleToggle = (newView: 'table' | 'graphic') => {
-        setView(newView);
-        // Optional: update router query if you want to reflect it in the URL
-    };
+    // const handleToggle = (newView: 'table' | 'graphic') => {
+    //     console.log('Toggling view to:', newView);
+    //     setView(newView);
+    //     // Optional: update router query if you want to reflect it in the URL
+    // };
 
     return (
         <Container className={styles.mainContainer} fluid>
             <Row>
-                <YearSelector />
-                <ControlBar />
-
+                {seasonSelector && <YearSelector view={view} />}
+                <ControlBar view={view} setView={setView} />
                 {view === 'graphic' ? (
                     <>
                         <Row>
                             <h2 className={styles.title}>
-                                🏆 Top 5 EPIQ Per Game Leaders of {TopFivePlayers[0].season_year}/
-                                {TopFivePlayers[0].season_year + 1}
+                                Leaders of the {TopFivePlayers[0].season_year} / {TopFivePlayers[0].season_year + 1} Season
                             </h2>
                             <TopFive players={TopFivePlayers} />
                         </Row>
@@ -72,12 +80,16 @@ export default function ByYearHome({
                         </Row>
                     </>
                 ) : (
-                    <TableView
-                        data={items}
-                        year={year}
-                        sortBy={sortBy}
-                        direction={direction}
-                    />
+
+                    <>
+                        <h1></h1>
+                        <TableView
+                            data={items}
+                            year={year}
+                            sortBy={sortBy}
+                            direction={direction}
+                        />
+                    </>
                 )}
             </Row>
         </Container>

@@ -1,4 +1,3 @@
-const { get } = require('http');
 const {
     getItems,
     getItem,
@@ -9,6 +8,23 @@ const {
     getTopPlayersByYear,
     updatePlayer
 } = require('./players');
+const {
+    insertGameLog,
+    insertPlayerEntries,
+    insertClutchEntries,
+    updateGameLogById,
+    updatePlayerEntriesByGameId,
+    updateClutchEntriesByGameId,
+    fetchGameLogs,
+    fetchPlayerEntries,
+    fetchClutchEntries,
+    fetchGameLogById,
+    fetchPlayerEntriesByGameId,
+    fetchClutchEntriesByGameId,
+    insertGameMetadata
+
+} = require('./player_game_stats');
+const { syncSeasonTotals } = require('./syncSeasonTotals');
 const {
     searchPlayersByName
 } = require('./player_search');
@@ -31,6 +47,23 @@ module.exports = {
     getAverageStatsBySeason,
     getAllAverageStatsBySeason,
     addPlayerStats,
-    updatePlayer
+    updatePlayer,
+    insertGameLog,
+    insertPlayerEntries,
+    insertClutchEntries,
+    updateGameLogById,
+    updatePlayerEntriesByGameId,
+    updateClutchEntriesByGameId,
+    fetchGameLogs,
+    fetchPlayerEntries,
+    fetchClutchEntries,
+    fetchGameLogById,
+    fetchPlayerEntriesByGameId,
+    fetchClutchEntriesByGameId,
+    syncSeasonTotals,
+    addPlayerStats,
+    insertGameMetadata
+
+
 };
 

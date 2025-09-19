@@ -80,7 +80,7 @@ export default function SearchBar() {
                                 setQuery('');
                             }}
                         >
-                            <Link href={`/getByPlayer?id=${player.id}`} passHref legacyBehavior>
+                            <Link href={`/getByPlayer?id=${player.id}&league=${player.league}`} passHref legacyBehavior>
                                 <a className={styles.searchLinks}>{player.name}</a>
                             </Link>
                         </ListGroup.Item>

@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Table from 'react-bootstrap/Table';
 import styles from '../player_stats_table.module.css'
-
+import { useLeague } from 'src/context/LeagueContext';
 
 export default function PerGameStatsTable({ stats }: { stats: any[] }) {
+    const { league } = useLeague();
 
 
     return (
@@ -34,7 +35,7 @@ export default function PerGameStatsTable({ stats }: { stats: any[] }) {
                     {stats.map((stat: any, index: number) => (
                         <tr key={`row-${stat.season_year}-${index}`}>
                             <td>
-                                <Link href={`getBySeason?year=${stat.season_year}&sortBy=seasonal_epiq&startAt=0&endBy=24&view=table`}>{stat.season_year}</Link>
+                                <Link href={`getBySeason?year=${stat.season_year}&sortBy=seasonal_epiq&startAt=0&endBy=24&view=table&league=${league}`}>{stat.season_year}</Link>
                             </td>
                             <td>{stat.games_played}</td>
                             <td>{stat.efficiency_possession_impact_quotient}</td>

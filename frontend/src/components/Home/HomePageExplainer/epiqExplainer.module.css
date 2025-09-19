@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap');
+
 .epiqExplainer {
     padding: 3rem 1rem;
     background-color: #f9f9f9;
@@ -13,19 +16,24 @@
 }
 
 .explainerTitle {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    color: #111;
     text-align: center;
-    color: #063849;
-    border-bottom: 3px solid #063849;
-    padding-bottom: 5px;
 }
 
 .explainerText {
-    font-size: 1.1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
     line-height: 1.6;
-    margin-bottom: 1rem;
+    color: #222;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem 0;
     text-align: center;
-    color: #444;
+    font-weight: 600;
 }

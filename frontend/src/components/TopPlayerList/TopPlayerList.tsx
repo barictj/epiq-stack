@@ -34,7 +34,7 @@ export default function TopPlayerList({
                                         fontSize: '18px',
                                     }}
                                 >
-                                    <Link href={`/getByPlayer?id=${player.player.id}`} style={{ color: colors.text }}>
+                                    <Link href={`/getByPlayer?id=${player.player.id}&league=${player.player.league}`} style={{ color: colors.text }}>
                                         <img
                                             src={player.player.player_image_url || 'https://via.placeholder.com/150'}
                                             alt={player.player.name}
